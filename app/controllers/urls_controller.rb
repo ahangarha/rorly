@@ -5,6 +5,13 @@ class UrlsController < ApplicationController
     @shortened_url = "#{root_url}#{params[:id]}"
   end
 
+  def redirect
+    id = helpers.to_id(params[:hash])
+    url = Url.find(id)
+
+    redirect_to url.original_url, allow_other_host: true
+  end
+
   def new
     @url = Url.new
   end
